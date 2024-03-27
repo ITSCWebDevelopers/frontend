@@ -21,3 +21,9 @@ a:active {
 button {
   cursor: pointer;
 }
+
+html,
+body,
+#root {
+  min-height: 100vh;
+}
