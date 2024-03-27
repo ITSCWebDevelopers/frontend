@@ -1,13 +1,10 @@
 import type {MockServerConfig} from 'mock-config-server';
+import * as REQUESTS from './mock/requests';
 
 const mockServerConfig: MockServerConfig = {
   baseUrl: '/api',
   rest: {
-    configs: [],
-  },
-  staticPath: {
-    path: '/mock/static/images',
-    prefix: '/static',
+    configs: Object.values(REQUESTS),
   },
 };
 

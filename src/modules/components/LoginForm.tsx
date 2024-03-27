@@ -1,4 +1,4 @@
-import {Box, Button, TextField} from '@mui/material';
+import {Box, Button, TextField, Typography} from '@mui/material';
 import {useLoginForm} from './LoginForm.hooks';
 import {styles} from './LoginForm.styles';
 
@@ -24,6 +24,11 @@ export const LoginForm = () => {
       <Button type='submit' size='large' variant='contained'>
         Войти
       </Button>
+      {errors.root && (
+        <Typography color='red' variant='subtitle1'>
+          {errors.root.message}
+        </Typography>
+      )}
     </Box>
   );
 };
