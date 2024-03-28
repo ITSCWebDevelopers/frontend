@@ -7,28 +7,28 @@ export const getApplicationsConfig: RestRequestConfig = {
     {
       data: [
         {
-          id: '123',
-          road_name: 'MI',
+          id: '1',
+          road_name: 'first',
         },
         {
-          id: '123',
-          road_name: 'MI',
+          id: '2',
+          road_name: 'second',
         },
         {
-          id: '123',
-          road_name: 'MI',
+          id: '3',
+          road_name: 'third',
         },
         {
-          id: '123',
-          road_name: 'MI',
+          id: '4',
+          road_name: 'fourth',
         },
         {
-          id: '123',
-          road_name: 'MI',
+          id: '5',
+          road_name: 'fifth',
         },
         {
-          id: '123',
-          road_name: 'MI',
+          id: '6',
+          road_name: 'sixth',
         },
       ],
     },

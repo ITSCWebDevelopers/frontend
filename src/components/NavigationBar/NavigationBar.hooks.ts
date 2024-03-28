@@ -25,6 +25,7 @@ export const useNavigationBar = () => {
   useEffect(() => {
     if (location.pathname.includes('/report')) setName(params.get('roadName') || 'Заявление');
     else if (location.pathname.includes('/defect')) setName(params.get('defectName') || 'Дефект');
+    else if (location.pathname.includes(ROUTES.CREATING_ASSIGNMENT)) setName('Создание поручения');
   }, [isRoot]);
 
   return {isRoot, name, handleTabsChange, path: location.pathname, handleBack};

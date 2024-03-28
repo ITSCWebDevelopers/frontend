@@ -7,28 +7,28 @@ export const getDamagesConfig: RestRequestConfig = {
     {
       data: [
         {
-          id: '123',
-          damage_type: 'MI',
+          id: '1',
+          damage_type: 'first',
           address: 'faefa[ef[ae',
         },
         {
-          id: '123',
-          damage_type: 'MI',
+          id: '2',
+          damage_type: 'second',
           address: 'faefa[ef[ae',
         },
         {
-          id: '123',
-          damage_type: 'MI',
+          id: '3',
+          damage_type: 'third',
           address: 'faefa[ef[ae',
         },
         {
-          id: '123',
-          damage_type: 'MI',
+          id: '4',
+          damage_type: 'fourth',
           address: 'faefa[ef[ae',
         },
         {
-          id: '123',
-          damage_type: 'MI',
+          id: '5',
+          damage_type: 'fifth',
           address: 'faefa[ef[ae',
         },
       ],
