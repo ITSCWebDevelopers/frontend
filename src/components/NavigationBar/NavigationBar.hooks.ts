@@ -3,7 +3,7 @@ import {useLocation, useNavigate, useSearchParams} from 'react-router-dom';
 import {ROUTES} from '@/shared/constants/routes';
 
 export const useNavigationBar = () => {
-  const [params, setParams] = useSearchParams();
+  const [params] = useSearchParams();
   const navigate = useNavigate();
   const location = useLocation();
   const [isRoot, setIsRoot] = useState(false);
