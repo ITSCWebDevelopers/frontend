@@ -1,4 +1,5 @@
 import {VIDEO_CONSTRAINTS} from '@/components/Camera/Camera.constants';
+import {GetFindAddress} from '@/shared/api/requests/address';
 import {Box, Button, FormControlLabel, Radio, RadioGroup, TextField, Typography} from '@mui/material';
 import {useEffect, useRef, useState} from 'react';
 import Webcam from 'react-webcam';
@@ -7,6 +8,7 @@ export const DefectModule = () => {
   const [coordinates, setCoordinates] = useState<any>(null);
   const [isCam, setIsCam] = useState(false);
   const [photos, setPhotos] = useState<string[]>([]);
+  const [address, setAddress] = useState('');
   const webcamRef = useRef<Webcam>(null);
 
   useEffect(() => {
@@ -19,11 +21,31 @@ export const DefectModule = () => {
     };
 
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(successHandler, errorHandler);
+      navigator.geolocation.getCurrentPosition(successHandler, errorHandler, {
+        enableHighAccuracy: true,
+      });
     } else {
       console.error('Geolocation is not supported by this browser.');
     }
   }, []);
+
+  useEffect(() => {
+    if (!coordinates) return;
+    const fetchAddress = async () => {
+      const response = await GetFindAddress({
+        config: {
+          params: {
+            format: 'json',
+            lat: coordinates.latitude,
+            lon: coordinates.longitude,
+            zoom: 18,
+          },
+        },
+      });
+      setAddress(response.data.display_name);
+    };
+    fetchAddress();
+  }, [coordinates]);
 
   const capture = () => {
     const imageSrc = webcamRef.current?.getScreenshot();
@@ -52,10 +74,7 @@ export const DefectModule = () => {
       </Box>
       <Box>
         <Typography variant='h6'>Адрес</Typography>
-        <Typography>
-          Вожовский переулок, Кромы, Стрелецкое сельское поселение, Кромской район, Орловская область, Центральный
-          федеральный округ, 303210, Россия
-        </Typography>
+        <Typography>{address.length ? address : 'Адрес не найден'}</Typography>
       </Box>
       <Box>
         <Typography variant='h6'>Выберите тип дефекта</Typography>
@@ -88,7 +107,18 @@ export const DefectModule = () => {
       </Box>
       <Box sx={{display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
         {photos?.map((photo, index) => (
-          <img style={{width: '100px', height: '100px'}} src={photo} key={index} />
+          <Box>
+            <img style={{display: 'block', width: '100px', height: '100px'}} src={photo} key={index} />
+            <Button
+              onClick={() => {
+                setPhotos((prev) => prev.filter((_, photoIndex) => photoIndex !== index));
+              }}
+              size='small'
+              color='error'
+            >
+              Удалить
+            </Button>
+          </Box>
         ))}
       </Box>
     </Box>
