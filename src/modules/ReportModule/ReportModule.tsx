@@ -42,7 +42,7 @@ export const ReportModule = () => {
         <Defect />
       </List>
       <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-        <Button onClick={() => navigate('/defect/create/')} variant='outlined'>
+        <Button onClick={() => navigate(`/defect/?road=${params.get('road')}`)} variant='outlined'>
           Добавить дефект
         </Button>
       </Box>

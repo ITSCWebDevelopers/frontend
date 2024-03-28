@@ -1,5 +1,6 @@
 import {Link, createBrowserRouter} from 'react-router-dom';
 import {Camera} from './components/Camera/Camera';
+import {Defect} from './pages/Defect/Defect';
 import {Login} from './pages/Login/Login';
 import {Report} from './pages/Report/Report';
 import {ROUTES} from './shared/constants/routes';
@@ -16,5 +17,6 @@ export const ROUTER = createBrowserRouter([
     ),
   },
   {path: '/login', element: <Login />},
-  {path: '/report/:id?', element: <Report />},
+  {path: '/report', element: <Report />},
+  {path: '/defect', element: <Defect />},
 ]);
