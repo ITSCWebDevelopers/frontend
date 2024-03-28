@@ -1,7 +1,6 @@
 import {useAppSelector} from '@/shared/hooks/redux';
 import {Box, Button, List, TextField, Typography} from '@mui/material';
 import {useNavigate, useSearchParams} from 'react-router-dom';
-import {styles} from './ReportModule.styles';
 import {Defect} from './components/Defect';
 export const ReportModule = () => {
   const defects = useAppSelector((state) => state.defect);
@@ -10,13 +9,6 @@ export const ReportModule = () => {
 
   return (
     <Box sx={{display: 'flex', height: '100%', flexDirection: 'column', gap: '10px'}}>
-      <Box>
-        <Typography variant={'h6'}>Наименование дороги или участка</Typography>
-        <Typography variant='body1' sx={styles.borderedText}>
-          {params.get('road')}
-        </Typography>
-      </Box>
-
       <Box>
         <Typography variant='h6'>Протяжённость</Typography>
         <Box sx={{display: 'flex', gap: '10px'}}>
