@@ -3,8 +3,8 @@ import {createSlice} from '@reduxjs/toolkit';
 import {loginAction} from './userAsyncActions';
 
 const INIT_DATA = {
-  isAuth: false,
-  token: '',
+  isAuth: localStorage.getItem('token') ? true : false,
+  token: localStorage.getItem('token') || '',
 };
 
 export const userSlice = createSlice({
@@ -12,9 +12,10 @@ export const userSlice = createSlice({
   initialState: INIT_DATA,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(loginAction.fulfilled, (state, action: PayloadAction<string>) => {
+    builder.addCase(loginAction.fulfilled, (state, {payload}: PayloadAction<TokenResponse>) => {
       state.isAuth = true;
-      state.token = action.payload;
+      localStorage.setItem('token', payload.token);
+      state.token = payload.token;
     });
   },
 });

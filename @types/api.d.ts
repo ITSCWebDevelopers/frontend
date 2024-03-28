@@ -3,14 +3,19 @@ interface LoginCredintails {
   password: string;
 }
 
+interface TokenResponse {
+  token: string;
+}
+
 interface TaskModel {
   id: string;
-  idApplication?: string;
-  roadName: string;
+  report_id?: string;
+  road_name: string;
   address: string;
   coordinates: {
+    id: string;
     lat: number;
     lng: number;
   };
-  defectsCount?: number;
+  defects_count?: number;
 }

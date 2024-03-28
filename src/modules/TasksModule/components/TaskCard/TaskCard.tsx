@@ -4,19 +4,19 @@ import {useTaskCard} from './TaskCard.hooks';
 import {styles} from './TaskCard.styles';
 import {Map} from '@/components/Map';
 
-export const TaskCard = ({address, coordinates, defectsCount, id, idApplication, roadName}: TaskModel) => {
+export const TaskCard = ({address, coordinates, defects_count, id, report_id, road_name}: TaskModel) => {
   const {handleAddressClick, handleApplicationClick, isAddress} = useTaskCard(id);
 
   return (
     <Box sx={styles.card}>
       <Box sx={styles.main}>
         <Box>
-          <Typography color='blue'>{roadName}</Typography>
-          {defectsCount && <Typography>Количество дефектов: {defectsCount}</Typography>}
+          <Typography color='blue'>{road_name}</Typography>
+          {defects_count && <Typography>Количество дефектов: {defects_count}</Typography>}
         </Box>
         <Box>
           <Typography>Статус</Typography>
-          <Typography>{idApplication ? 'Повторный выезд' : 'Первый выезд'}</Typography>
+          <Typography>{report_id ? 'Повторный выезд' : 'Первый выезд'}</Typography>
         </Box>
       </Box>
 

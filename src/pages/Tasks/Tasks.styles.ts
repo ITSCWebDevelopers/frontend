@@ -4,7 +4,6 @@ export const styles: Styles = {
     display: 'flex',
     flexDirection: 'column',
     gap: '20px',
-    alignItems: 'center',
     minHeight: '100vh',
   },
 };
