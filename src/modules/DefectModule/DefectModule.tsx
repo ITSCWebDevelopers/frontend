@@ -1,31 +1,30 @@
 import {VIDEO_CONSTRAINTS} from '@/components/Camera/Camera.constants';
 import {GetFindAddress} from '@/shared/api/requests/address';
+import {useAppDispatch} from '@/shared/hooks/redux';
+import {Defect, setDefect} from '@/store/defect/defectSlice';
 import {Box, Button, FormControlLabel, Radio, RadioGroup, TextField, Typography} from '@mui/material';
 import {useEffect, useRef, useState} from 'react';
+import {useForm} from 'react-hook-form';
+import {useNavigate} from 'react-router-dom';
 import Webcam from 'react-webcam';
 
 export const DefectModule = () => {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [coordinates, setCoordinates] = useState<any>(null);
   const [isCam, setIsCam] = useState(false);
   const [photos, setPhotos] = useState<string[]>([]);
   const [address, setAddress] = useState('');
+  const {register, getValues} = useForm<Defect>();
   const webcamRef = useRef<Webcam>(null);
-
   useEffect(() => {
-    const successHandler = (position: GeolocationPosition) => {
-      setCoordinates({latitude: position.coords.latitude, longitude: position.coords.longitude});
-    };
-
-    const errorHandler = (error: GeolocationPositionError) => {
-      console.error('Error getting user location:', error);
-    };
-
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(successHandler, errorHandler, {
-        enableHighAccuracy: true,
-      });
-    } else {
-      console.error('Geolocation is not supported by this browser.');
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setCoordinates({latitude: position.coords.latitude, longitude: position.coords.longitude});
+        },
+        () => {},
+      );
     }
   }, []);
 
@@ -53,8 +52,22 @@ export const DefectModule = () => {
     setPhotos((prev) => [...prev, imageSrc]);
   };
 
+  const onSaveDefect = () => {
+    console.log('dispacth');
+    dispatch(
+      setDefect({
+        address: address,
+        coords: coordinates,
+        defectType: getValues('defectType'),
+        defectView: getValues('defectView'),
+        photos: photos,
+        square: getValues('square'),
+      }),
+    );
+  };
+
   return (
-    <Box sx={{display: 'flex', flexDirection: 'column', gap: '20px', justifyContent: 'center'}}>
+    <Box sx={{display: 'flex', height: '100%', flexDirection: 'column', gap: '20px'}}>
       {isCam === true && (
         <div>
           <Webcam audio={false} ref={webcamRef} screenshotFormat='image/jpeg' videoConstraints={VIDEO_CONSTRAINTS} />
@@ -85,18 +98,18 @@ export const DefectModule = () => {
           defaultValue='female'
           name='radio-buttons-group'
         >
-          <FormControlLabel value='female' control={<Radio />} label='Знаки' />
-          <FormControlLabel value='male' control={<Radio />} label='Дефекты/Барьеры' />
+          <FormControlLabel {...register('defectType')} value='female' control={<Radio />} label='Знаки' />
+          <FormControlLabel {...register('defectType')} value='male' control={<Radio />} label='Дефекты/Барьеры' />
         </RadioGroup>
       </Box>
       <Box>
-        <Typography variant='h6'>Введите тип дефекта</Typography>
-        <TextField size='small' sx={{width: '100%'}} />
+        <Typography variant='h6'>Введите вид дефекта</Typography>
+        <TextField {...register('defectView')} size='small' sx={{width: '100%'}} />
       </Box>
 
       <Box>
         <Typography variant='h6'>Введите площадь</Typography>
-        <TextField size='small' type='number' sx={{width: '20%', marginRight: '10px'}} />
+        <TextField {...register('square')} size='small' type='number' sx={{width: '20%', marginRight: '10px'}} />
         <Typography display={'inline'}>кв.м.</Typography>
       </Box>
 
@@ -121,6 +134,25 @@ export const DefectModule = () => {
             </Button>
           </Box>
         ))}
+      </Box>
+      <Box
+        sx={{
+          display: 'flex',
+          marginBlockStart: 'auto',
+          marginBlockEnd: '20px',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Button
+          onClick={() => {
+            onSaveDefect();
+            navigate(-1);
+          }}
+          variant='contained'
+        >
+          Сохранить
+        </Button>
       </Box>
     </Box>
   );

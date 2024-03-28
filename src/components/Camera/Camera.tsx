@@ -8,8 +8,7 @@ export const Camera = () => {
 
   const capture = () => {
     const imageSrc = webcamRef.current?.getScreenshot();
-    setImageSrc((prev) => (prev = imageSrc));
-    return imageSrc;
+    setImageSrc((prev) => imageSrc);
   };
 
   return (
