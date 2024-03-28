@@ -1,24 +1,19 @@
 import {useRef, useState} from 'react';
 import Webcam from 'react-webcam';
+import {VIDEO_CONSTRAINTS} from './Camera.constants';
 
 export const Camera = () => {
-  const webcamRef = useRef<any>(null);
-  const [imageSrc, setImageSrc] = useState(null);
-
-  const videoConstraints = {
-    width: 300,
-    height: 300,
-    facingMode: 'environment',
-  };
+  const webcamRef = useRef<Webcam>(null);
+  const [imageSrc, setImageSrc] = useState<string | null>();
 
   const capture = () => {
-    const imageSrc = webcamRef.current.getScreenshot();
+    const imageSrc = webcamRef.current?.getScreenshot();
     setImageSrc(imageSrc);
   };
 
   return (
     <div>
-      <Webcam audio={false} ref={webcamRef} screenshotFormat='image/jpeg' videoConstraints={videoConstraints} />
+      <Webcam audio={false} ref={webcamRef} screenshotFormat='image/jpeg' videoConstraints={VIDEO_CONSTRAINTS} />
       <button onClick={capture}>Capture Photo</button>
       {imageSrc && (
         <div>
