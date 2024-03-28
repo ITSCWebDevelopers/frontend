@@ -9,3 +9,19 @@ export const Report = () => {
     </Box>
   );
 };
+
+/*
+
+
+POST /check/new/
+headers : {
+  "Content-Type" : "application/json",
+  "Authorization" : "Token " + token_from_login
+}
+body : JS
+
+
+
+
+
+*/

@@ -3,5 +3,8 @@ export const styles: Styles = {
     border: 1,
     borderRadius: '8px',
     padding: '5px',
+    overflow: 'auto',
+    whiteSpace: 'break-spaces',
+    maxWidth: '90vw',
   },
 };

@@ -10,7 +10,7 @@ export const ROUTER = createBrowserRouter([
     element: (
       <div>
         <Link to={ROUTES.LOGIN}>Login</Link>
-        <Link to={ROUTES.REPORT('id_for_report')}>Report</Link>
+        <Link to={ROUTES.REPORT('', 'nameOFRoad')}>Report</Link>
         <Camera />
       </div>
     ),

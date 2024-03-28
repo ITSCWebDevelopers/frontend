@@ -1,12 +1,18 @@
 import {Box, Button, List, TextField, Typography} from '@mui/material';
+import {useNavigate, useSearchParams} from 'react-router-dom';
 import {styles} from './ReportModule.styles';
 import {Defect} from './components/Defect';
 export const ReportModule = () => {
+  const [params] = useSearchParams();
+  const navigate = useNavigate();
+
   return (
     <Box sx={{display: 'flex', height: '100%', flexDirection: 'column', gap: '10px'}}>
       <Box>
         <Typography variant={'h6'}>Наименование дороги или участка</Typography>
-        <Typography sx={styles.borderedText}>М5 «Урал» Москва - Рязань - Пенза - Самара - Уфа - Челябинск</Typography>
+        <Typography variant='body1' sx={styles.borderedText}>
+          {params.get('road')}
+        </Typography>
       </Box>
 
       <Box>
@@ -20,23 +26,25 @@ export const ReportModule = () => {
       </Box>
       <Box>
         <Typography variant={'h6'}>Категория дороги</Typography>
-        <Typography sx={styles.borderedText}>Поперечная трещина</Typography>
+        <TextField size='small' sx={{width: '100%'}}></TextField>
       </Box>
       <Box>
         <Typography variant={'h6'}>Тип покрытия</Typography>
-        <Typography sx={styles.borderedText}>Грунтовое покрытие</Typography>
+        <TextField size='small' sx={{width: '100%'}}></TextField>
       </Box>
       <Box>
-        <Typography>Список дефектов</Typography>
+        <Typography variant='h6'>Список дефектов</Typography>
       </Box>
-      <List sx={{width: '100%', bgcolor: 'background.paper'}}>
+      <List sx={{width: '100%'}}>
         <Defect />
         <Defect />
         <Defect />
         <Defect />
       </List>
       <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-        <Button variant='outlined'>Добавить дефект</Button>
+        <Button onClick={() => navigate('/defect/create/')} variant='outlined'>
+          Добавить дефект
+        </Button>
       </Box>
       <Box
         sx={{
@@ -52,3 +60,33 @@ export const ReportModule = () => {
     </Box>
   );
 };
+
+/**
+ * 
+ * 
+
+{
+  road : hakdh
+  length : 8
+  coating : ytasyu
+  category : ydkjd
+  defects : [
+    {
+      photo
+      type
+    },
+    {
+      photo
+      type
+    },
+    {
+      photo
+      type
+    }
+  ]
+
+}
+
+
+ * 
+ */

@@ -1,5 +1,5 @@
 export const ROUTES = {
   ROOT: '/',
   LOGIN: '/login',
-  REPORT: (id?: string) => `/report/${id}`,
+  REPORT: (id?: string, roadName?: string) => `/report/?id=${id}&road=${roadName}`,
 };
