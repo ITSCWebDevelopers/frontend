@@ -8,19 +8,13 @@ export const Camera = () => {
 
   const capture = () => {
     const imageSrc = webcamRef.current?.getScreenshot();
-    setImageSrc(imageSrc);
+    setImageSrc((prev) => imageSrc);
   };
 
   return (
     <div>
       <Webcam audio={false} ref={webcamRef} screenshotFormat='image/jpeg' videoConstraints={VIDEO_CONSTRAINTS} />
       <button onClick={capture}>Capture Photo</button>
-      {imageSrc && (
-        <div>
-          <h2>Captured Photo:</h2>
-          <img src={imageSrc} alt='Captured' />
-        </div>
-      )}
     </div>
   );
 };

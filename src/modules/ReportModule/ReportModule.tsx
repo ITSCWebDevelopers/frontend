@@ -1,8 +1,10 @@
+import {useAppSelector} from '@/shared/hooks/redux';
 import {Box, Button, List, TextField, Typography} from '@mui/material';
 import {useNavigate, useSearchParams} from 'react-router-dom';
 import {styles} from './ReportModule.styles';
 import {Defect} from './components/Defect';
 export const ReportModule = () => {
+  const defects = useAppSelector((state) => state.defect);
   const [params] = useSearchParams();
   const navigate = useNavigate();
 
@@ -35,14 +37,9 @@ export const ReportModule = () => {
       <Box>
         <Typography variant='h6'>Список дефектов</Typography>
       </Box>
-      <List sx={{width: '100%'}}>
-        <Defect />
-        <Defect />
-        <Defect />
-        <Defect />
-      </List>
+      <List sx={{width: '100%'}}>{!!defects.length && defects.map((defect, index) => <Defect />)}</List>
       <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-        <Button onClick={() => navigate('/defect/create/')} variant='outlined'>
+        <Button onClick={() => navigate(`/defect/?road=${params.get('road')}`)} variant='outlined'>
           Добавить дефект
         </Button>
       </Box>
