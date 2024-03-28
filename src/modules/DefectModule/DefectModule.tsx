@@ -49,6 +49,7 @@ export const DefectModule = () => {
 
   const capture = () => {
     const imageSrc = webcamRef.current?.getScreenshot();
+    if (!imageSrc) return;
     setPhotos((prev) => [...prev, imageSrc]);
   };
 
