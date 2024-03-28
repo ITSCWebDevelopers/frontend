@@ -1,11 +1,11 @@
-import {Box, Button, Typography} from '@mui/material';
+import {Map} from '@/components/Map';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
+import {Box, Button, Typography} from '@mui/material';
 import {useTaskCard} from './TaskCard.hooks';
 import {styles} from './TaskCard.styles';
-import {Map} from '@/components/Map';
 
-export const TaskCard = ({address, coordinates, defects_count, id, report_id, road_name}: TaskModel) => {
-  const {handleAddressClick, handleApplicationClick, isAddress} = useTaskCard(id, road_name);
+export const TaskCard = ({address, coordinates, defects_count, report_id, road_name}: TaskModel) => {
+  const {handleAddressClick, handleApplicationClick, isAddress} = useTaskCard(report_id, road_name);
 
   return (
     <Box sx={styles.card}>

@@ -20,7 +20,7 @@ export const getTasksConfig: RestRequestConfig = {
         },
         {
           id: '2',
-          report_id: '2',
+          //report_id: '2',
           road_name: 'MI2',
           address: 'ул. Ленина',
           coordinates: {
