@@ -31,7 +31,7 @@ export const ReportModule = () => {
       </Box>
       <List sx={{width: '100%'}}>{!!defects.length && defects.map((_, index) => <Defect key={index} />)}</List>
       <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-        <Button onClick={() => navigate(`/defect/?road=${params.get('road')}`)} variant='outlined'>
+        <Button onClick={() => navigate(`/defect?roadName=${params.get('road')}`)} variant='outlined'>
           Добавить дефект
         </Button>
       </Box>
