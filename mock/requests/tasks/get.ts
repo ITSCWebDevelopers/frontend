@@ -7,9 +7,9 @@ export const getTasksConfig: RestRequestConfig = {
     {
       data: [
         {
-          id: '123',
-          report_id: '123',
-          road_name: 'MI',
+          id: '1',
+          report_id: '2',
+          road_name: 'MI1',
           address: 'ул. Новособорная',
           coordinates: {
             id: '123',
@@ -19,9 +19,9 @@ export const getTasksConfig: RestRequestConfig = {
           defects_count: 2,
         },
         {
-          id: '123',
-          report_id: '123',
-          road_name: 'MI',
+          id: '2',
+          report_id: '2',
+          road_name: 'MI2',
           address: 'ул. Ленина',
           coordinates: {
             lat: 58,
@@ -31,10 +31,10 @@ export const getTasksConfig: RestRequestConfig = {
           defects_count: null,
         },
         {
-          id: '123',
-          report_id: '123',
-          road_name: 'MI',
-          address: 'ул. Ленина',
+          id: '3',
+          report_id: '3',
+          road_name: 'MI3',
+          address: 'ул. Калинина',
           coordinates: {
             lat: 58,
             lng: 56,
