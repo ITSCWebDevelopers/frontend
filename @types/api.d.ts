@@ -19,3 +19,14 @@ interface TaskModel {
   };
   defects_count?: number;
 }
+
+interface ApplicationShortDto {
+  id: string;
+  road_name: string;
+}
+
+interface DamageShortDto {
+  id: string;
+  damage_type: string;
+  address: string;
+}
