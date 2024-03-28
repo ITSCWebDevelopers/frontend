@@ -1,7 +1,8 @@
 import {combineReducers, configureStore} from '@reduxjs/toolkit';
+import {defectSlice} from './defect/defectSlice';
 import {userSlice} from './user/userSlice';
 
-const rootReducer = combineReducers({user: userSlice.reducer});
+const rootReducer = combineReducers({user: userSlice.reducer, defect: defectSlice.reducer});
 
 export const setupStore = () => configureStore({reducer: rootReducer, devTools: true});
 
