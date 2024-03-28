@@ -35,7 +35,7 @@ export const TaskCard = ({address, coordinates, defects_count, report_id, road_n
       {isAddress && (
         <Box sx={styles.address}>
           <Typography>{`${address}, (${coordinates.lat}, ${coordinates.lng})`}</Typography>
-          <Map center={coordinates} size={{width: '100%', height: '200px'}} zoom={5} />
+          <Map center={coordinates} size={{width: '100%', height: '200px'}} zoom={10} />
         </Box>
       )}
     </Box>

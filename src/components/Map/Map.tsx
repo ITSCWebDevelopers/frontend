@@ -1,6 +1,6 @@
-import {useState} from 'react';
-import {Placemark, YMaps, Map as YandexMap} from 'react-yandex-map';
 import {CircularProgress} from '@mui/material';
+import {useState} from 'react';
+import {Placemark, YMaps, Map as YandexMap, ZoomControl} from 'react-yandex-map';
 import type {MapProps} from './Map.types';
 
 export const Map = (props: MapProps) => {
@@ -19,6 +19,7 @@ export const Map = (props: MapProps) => {
         width={props.size?.width}
         style={{width: props.size?.width, height: props.size?.height}}
       >
+        <ZoomControl />
         <Placemark geometry={initialState.center} />
       </YandexMap>
     </YMaps>
