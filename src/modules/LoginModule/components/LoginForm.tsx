@@ -16,6 +16,7 @@ export const LoginForm = () => {
       />
       <TextField
         label='Пароль'
+        type='password'
         helperText={errors.password?.message}
         id='password'
         error={!!errors.password}
