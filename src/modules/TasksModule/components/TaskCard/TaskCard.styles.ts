@@ -7,6 +7,7 @@ export const styles: Styles = {
 
   main: {
     display: 'flex',
+    justifyContent: 'space-between',
     gap: '40px',
 
     '&>*': {
@@ -24,5 +25,12 @@ export const styles: Styles = {
     '&>*': {
       flex: '1 1 auto',
     },
+  },
+
+  address: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '15px',
   },
 };

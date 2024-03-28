@@ -2,6 +2,7 @@ import {Box, Button, Typography} from '@mui/material';
 import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import {useTaskCard} from './TaskCard.hooks';
 import {styles} from './TaskCard.styles';
+import {Map} from '@/components/Map';
 
 export const TaskCard = ({address, coordinates, defectsCount, id, idApplication, roadName}: TaskModel) => {
   const {handleAddressClick, handleApplicationClick, isAddress} = useTaskCard(id);
@@ -31,7 +32,12 @@ export const TaskCard = ({address, coordinates, defectsCount, id, idApplication,
           Адрес
         </Button>
       </Box>
-      {isAddress && <Typography>{`${address}, (${coordinates.lat}, ${coordinates.lng})`}</Typography>}
+      {isAddress && (
+        <Box sx={styles.address}>
+          <Typography>{`${address}, (${coordinates.lat}, ${coordinates.lng})`}</Typography>
+          <Map center={coordinates} size={{width: '100%', height: '200px'}} zoom={5} />
+        </Box>
+      )}
     </Box>
   );
 };

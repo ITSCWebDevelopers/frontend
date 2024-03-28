@@ -12,8 +12,8 @@ export const getTasksConfig: RestRequestConfig = {
           roadName: 'MI',
           address: 'ул. Новособорная',
           coordinates: {
-            lat: 44,
-            lng: 32,
+            lat: 58,
+            lng: 56,
           },
           defectsCount: 2,
         },
@@ -22,10 +22,10 @@ export const getTasksConfig: RestRequestConfig = {
           roadName: 'MI',
           address: 'ул. Ленина',
           coordinates: {
-            lat: 44,
-            lng: 32,
+            lat: 58,
+            lng: 56,
           },
-          defectsCount: 0,
+          defectsCount: null,
         },
         {
           id: '123',
@@ -33,8 +33,8 @@ export const getTasksConfig: RestRequestConfig = {
           roadName: 'MI',
           address: 'ул. Ленина',
           coordinates: {
-            lat: 44,
-            lng: 32,
+            lat: 58,
+            lng: 56,
           },
           defectsCount: 2,
         },

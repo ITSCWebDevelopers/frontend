@@ -5,6 +5,6 @@ export const styles: Styles = {
     flexDirection: 'column',
     gap: '20px',
     alignItems: 'center',
-    height: '100vh',
+    minHeight: '100vh',
   },
 };

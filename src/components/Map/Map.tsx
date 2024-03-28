@@ -1,23 +1,26 @@
-import {YMaps, Map as YandexMap} from 'react-yandex-map';
+import {useState} from 'react';
+import {Placemark, YMaps, Map as YandexMap} from 'react-yandex-map';
+import {CircularProgress} from '@mui/material';
+import type {MapProps} from './Map.types';
 
-interface IMapProps {
-  center: {
-    lat: number;
-    magn: number;
-  };
-  zoom: number;
-  size: number;
-}
-
-export const Map = (props: IMapProps) => {
+export const Map = (props: MapProps) => {
   const initialState = {
-    center: [props.center.lat, props.center.magn],
+    center: [props.center.lat, props.center.lng],
     zoom: props.zoom,
   };
+  const [isLoading, setisLoading] = useState(true);
 
   return (
     <YMaps>
-      <YandexMap defaultState={initialState} width={props.size} style={{width: props.size, height: props.size}} />
+      {isLoading && <CircularProgress />}
+      <YandexMap
+        onLoad={() => setisLoading((prev) => !prev)}
+        defaultState={initialState}
+        width={props.size?.width}
+        style={{width: props.size?.width, height: props.size?.height}}
+      >
+        <Placemark geometry={initialState.center} />
+      </YandexMap>
     </YMaps>
   );
 };
