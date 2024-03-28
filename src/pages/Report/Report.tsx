@@ -1,14 +1,12 @@
-import {ReportModule} from '@/modules/ReportModule';
 import {Box} from '@mui/material';
 import {styles} from './Report.styles';
+import {ReportModule} from '@/modules/ReportModule';
 
-export const Report = () => {
-  return (
-    <Box sx={styles.wrapper}>
-      <ReportModule />
-    </Box>
-  );
-};
+export const Report = () => (
+  <Box sx={styles.wrapper}>
+    <ReportModule />
+  </Box>
+);
 
 /*
 
