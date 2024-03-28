@@ -1,4 +1,3 @@
-import {VIDEO_CONSTRAINTS} from '@/components/Camera/Camera.constants';
 import {GetFindAddress} from '@/shared/api/requests/address';
 import {useAppDispatch} from '@/shared/hooks/redux';
 import {Defect, setDefect} from '@/store/defect/defectSlice';
@@ -7,6 +6,7 @@ import {useEffect, useRef, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 import Webcam from 'react-webcam';
+import {CameraModal} from './CameraModal';
 
 export const DefectModule = () => {
   const navigate = useNavigate();
@@ -50,10 +50,10 @@ export const DefectModule = () => {
     const imageSrc = webcamRef.current?.getScreenshot();
     if (!imageSrc) return;
     setPhotos((prev) => [...prev, imageSrc]);
+    setIsCam(false);
   };
 
   const onSaveDefect = () => {
-    console.log('dispacth');
     dispatch(
       setDefect({
         address: address,
@@ -70,8 +70,7 @@ export const DefectModule = () => {
     <Box sx={{display: 'flex', height: '100%', flexDirection: 'column', gap: '20px'}}>
       {isCam === true && (
         <div>
-          <Webcam audio={false} ref={webcamRef} screenshotFormat='image/jpeg' videoConstraints={VIDEO_CONSTRAINTS} />
-          <button onClick={capture}>Capture Photo</button>
+          <CameraModal webcamRef={webcamRef} capture={capture} open={isCam} onClose={() => setIsCam(false)} />
         </div>
       )}
       <Box>

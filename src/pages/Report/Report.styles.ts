@@ -3,6 +3,6 @@ export const styles: Styles = {
     display: 'flex',
     flexDirection: 'column',
     gap: '20px',
-    height: '100vh',
+    height: '90vh',
   },
 };

@@ -1,5 +1,5 @@
 export const VIDEO_CONSTRAINTS = {
-  width: 300,
-  height: 300,
+  width: 380,
+  height: 550,
   facingMode: 'environment',
 };
