@@ -44,15 +44,5 @@ export const getTasksConfig: RestRequestConfig = {
         },
       ],
     },
-    {
-      data: {},
-      interceptors: {
-        response: (data, params) => {
-          params.setStatusCode(400);
-
-          return data;
-        },
-      },
-    },
   ],
 };
