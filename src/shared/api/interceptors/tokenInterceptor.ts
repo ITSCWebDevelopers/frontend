@@ -1,4 +1,4 @@
-export const tokenInterceptor = (config) => {
+export const tokenInterceptor = (config: any) => {
   const token = localStorage.getItem('token');
 
   if (token && config.headers) {

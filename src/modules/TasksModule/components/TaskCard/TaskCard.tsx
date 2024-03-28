@@ -5,7 +5,7 @@ import {styles} from './TaskCard.styles';
 import {Map} from '@/components/Map';
 
 export const TaskCard = ({address, coordinates, defects_count, id, report_id, road_name}: TaskModel) => {
-  const {handleAddressClick, handleApplicationClick, isAddress} = useTaskCard(id);
+  const {handleAddressClick, handleApplicationClick, isAddress} = useTaskCard(id, road_name);
 
   return (
     <Box sx={styles.card}>
