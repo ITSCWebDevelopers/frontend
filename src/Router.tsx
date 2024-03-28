@@ -10,7 +10,7 @@ export const ROUTER = createBrowserRouter([
     element: <Layout />,
     children: [
       {path: '/', element: <Tasks />},
-      {path: '/report', element: <p>Report</p>},
+      {path: '/report/:id?', element: <Report />},
       {path: '/assignment', element: <p>assignment</p>},
       {path: '/creating-assignment', element: <p>creating-assignment</p>},
       {path: '/defect', element: <p>creating-assignment</p>},
