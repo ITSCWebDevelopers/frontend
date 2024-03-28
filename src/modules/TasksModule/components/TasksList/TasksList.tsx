@@ -1,11 +1,13 @@
-import {Box} from '@mui/material';
+import {Box, Divider} from '@mui/material';
 import {TaskCard} from '../TaskCard/TaskCard';
 import type {TasksListProps} from './TasksList.types';
+import {styles} from './TasksList.styles';
 
 export const TasksList = ({tasks}: TasksListProps) => (
-  <Box component='ul'>
+  <Box sx={styles.list} component='ul'>
     {tasks.map((task) => (
-      <Box component='li' key={task.id}>
+      <Box sx={styles.item} component='li' key={task.id}>
+        <Divider />
         <TaskCard {...task} />
       </Box>
     ))}

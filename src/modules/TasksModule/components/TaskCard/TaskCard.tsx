@@ -1,14 +1,16 @@
 import {Box, Button, Typography} from '@mui/material';
+import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import {useTaskCard} from './TaskCard.hooks';
+import {styles} from './TaskCard.styles';
 
 export const TaskCard = ({address, coordinates, defectsCount, id, idApplication, roadName}: TaskModel) => {
   const {handleAddressClick, handleApplicationClick, isAddress} = useTaskCard(id);
 
   return (
-    <Box>
-      <Box>
+    <Box sx={styles.card}>
+      <Box sx={styles.main}>
         <Box>
-          <Typography>{roadName}</Typography>
+          <Typography color='blue'>{roadName}</Typography>
           {defectsCount && <Typography>Количество дефектов: {defectsCount}</Typography>}
         </Box>
         <Box>
@@ -17,15 +19,19 @@ export const TaskCard = ({address, coordinates, defectsCount, id, idApplication,
         </Box>
       </Box>
 
-      <Box>
+      <Box sx={styles.panel}>
         <Button variant='contained' onClick={handleApplicationClick}>
           Отчёт
         </Button>
-        <Button variant='outlined' onClick={handleAddressClick}>
+        <Button
+          variant='outlined'
+          onClick={handleAddressClick}
+          endIcon={<ArrowDownwardIcon sx={{transform: isAddress ? '' : 'rotate(180deg)'}} />}
+        >
           Адрес
         </Button>
-        {isAddress && <Typography>{`${address}, (${coordinates.lat}, ${coordinates.lng})`}</Typography>}
       </Box>
+      {isAddress && <Typography>{`${address}, (${coordinates.lat}, ${coordinates.lng})`}</Typography>}
     </Box>
   );
 };
