@@ -1,6 +1,14 @@
-import {Box} from '@mui/material';
+import {Box, Divider} from '@mui/material';
+import {Outlet} from 'react-router-dom';
+import {NavigationBar} from '../NavigationBar';
 import {styles} from './Layout.styles';
 
-export const Layout = () => {
-  return <Box sx={styles.wrapper}></Box>;
-};
+export const Layout = () => (
+  <Box sx={styles.wrapper}>
+    <NavigationBar />
+    <Divider sx={styles.divider} />
+    <Box component='main' sx={styles.main}>
+      <Outlet />
+    </Box>
+  </Box>
+);

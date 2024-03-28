@@ -1,11 +1,13 @@
 import {createBrowserRouter} from 'react-router-dom';
-import {Login} from './pages/Login/Login';
-import {Tasks} from './pages/Tasks/Tasks';
+import {Login} from './pages/Login';
+import {Tasks} from './pages/Tasks';
+import {Layout} from './components/Layout';
 
 export const ROUTER = createBrowserRouter([
+  {path: '/login', element: <Login />},
   {
     path: '/',
-    element: <Tasks />,
+    element: <Layout />,
+    children: [{path: '/', element: <Tasks />}],
   },
-  {path: '/login', element: <Login />},
 ]);

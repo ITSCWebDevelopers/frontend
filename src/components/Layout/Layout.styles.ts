@@ -1,6 +1,16 @@
 export const styles: Styles = {
   wrapper: {
-    paddingInline: '20px',
-    paddingBlock: '15px',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+
+  divider: {
+    marginBlock: '5px',
+  },
+
+  main: {
+    flex: '1 1 auto',
+    paddingInline: '15px',
+    paddingBlock: '5px',
   },
 };
