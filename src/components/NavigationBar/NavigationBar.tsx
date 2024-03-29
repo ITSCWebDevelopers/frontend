@@ -9,7 +9,7 @@ export const NavigationBar = () => {
   const theme = useTheme();
 
   return (
-    <Box sx={styles.navigation}>
+    <Box>
       {isRoot ? (
         <Tabs sx={styles.tabs} variant='fullWidth' value={path} onChange={handleTabsChange}>
           <Tab sx={{...theme.typography.h3}} label='Актуальные задачи' value={ROUTES.ROOT} />
@@ -20,7 +20,9 @@ export const NavigationBar = () => {
           <IconButton sx={styles.icon} onClick={handleBack}>
             <ArrowBackIcon />
           </IconButton>
-          <Typography variant='h2'>{name}</Typography>
+          <Typography sx={styles.name} variant='h2'>
+            {name}
+          </Typography>
         </Box>
       )}
     </Box>
