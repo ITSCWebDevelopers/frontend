@@ -1,4 +1,4 @@
-import {getReports} from '@/shared/api/requests/reports';
+import {getReport} from '@/shared/api/requests/reports';
 import {useAppSelector} from '@/shared/hooks/redux';
 import {Box, Button, List, TextField, Typography} from '@mui/material';
 import {useEffect, useState} from 'react';
@@ -13,9 +13,9 @@ export const ReportModule = () => {
   useEffect(() => {
     const fetchReport = async () => {
       try {
-        const response = await getReports();
-        console.log(response.data.find((r) => r.report_id.toString() === params.get('reportId')));
-        setReportData(response.data.filter((r) => r.report_id.toString() === params.get('reportId'))[0]);
+        const response = await getReport(params.get('reportId'));
+        console.log(response);
+        setReportData(response.data);
       } catch (e) {
         console.error(e);
       }
@@ -29,7 +29,6 @@ export const ReportModule = () => {
   const onCreateReport = () => {
     console.log('Создал отчет');
     console.log(defects);
-    //    navigate('/');
     window.location.href = '/';
   };
 
@@ -43,19 +42,14 @@ export const ReportModule = () => {
             size={'small'}
             type='number'
             disabled={!!reportData}
-            value={reportData?.road_size}
+            value={reportData?.road_length}
           />
           <Typography sx={{width: 'fit-content'}}>км</Typography>
         </Box>
       </Box>
       <Box>
         <Typography variant='body1'>Категория дороги</Typography>
-        <TextField
-          size='small'
-          sx={{width: '100%'}}
-          disabled={!!reportData}
-          value={reportData?.road_category}
-        ></TextField>
+        <TextField size='small' sx={{width: '100%'}} disabled={!!reportData} value={reportData?.road_type}></TextField>
       </Box>
       <Box>
         <Typography variant='body1'>Тип покрытия</Typography>
@@ -63,19 +57,16 @@ export const ReportModule = () => {
           size='small'
           sx={{width: '100%'}}
           disabled={!!reportData}
-          value={reportData?.surface_type}
+          value={reportData?.road_coating}
         ></TextField>
       </Box>
       <Box>
         <Typography variant='body1'>Список дефектов</Typography>
       </Box>
-      {reportData ? (
-        <List sx={{width: '100%'}}>
-          {!!reportData.defects.length && reportData.defects.map((_, index) => <Defect key={index} />)}
-        </List>
-      ) : (
-        <List sx={{width: '100%'}}>{!!defects.length && defects.map((_, index) => <Defect key={index} />)}</List>
-      )}
+      <List sx={{width: '100%'}}>
+        {!!reportData?.damages && reportData?.damages.map((_, index) => <Defect type='approved' key={index} />)}
+        {!!defects.length && defects.map((_, index) => <Defect type='loaded' key={index} />)}
+      </List>
       <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
         <Button onClick={() => navigate(`/defect?roadName=${params.get('roadName')}`)} variant='outlined'>
           Добавить дефект
