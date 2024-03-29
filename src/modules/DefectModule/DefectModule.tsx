@@ -1,24 +1,14 @@
 import {useEffect, useRef, useState} from 'react';
-import {
-  Box,
-  Button,
-  FormControl,
-  FormControlLabel,
-  MenuItem,
-  Radio,
-  RadioGroup,
-  Select,
-  TextField,
-  Typography,
-} from '@mui/material';
+import {Box, Button, FormControlLabel, Radio, RadioGroup, TextField, Typography} from '@mui/material';
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 import type Webcam from 'react-webcam';
 import {CameraModal} from './CameraModal';
 import {setDefect} from '@/store/defect/defectSlice';
-import type {Defect} from '@/store/defect/defectSlice';
 import {useAppDispatch} from '@/shared/hooks/redux';
 import {GetFindAddress} from '@/shared/api/requests/address';
+
+import type {Defect} from '@/store/defect/defectSlice';
 
 export const DefectModule = () => {
   const navigate = useNavigate();
@@ -27,7 +17,7 @@ export const DefectModule = () => {
   const [isCam, setIsCam] = useState(false);
   const [photos, setPhotos] = useState<string[]>([]);
   const [address, setAddress] = useState('');
-  const {register, getValues} = useForm<Defect>({defaultValues: {defectView: ''}});
+  const {register, getValues, watch} = useForm<Defect>();
   const webcamRef = useRef<Webcam>(null);
   useEffect(() => {
     if (navigator.geolocation) {
@@ -88,7 +78,7 @@ export const DefectModule = () => {
         </div>
       )}
       <Box>
-        <Typography variant='h2' align='left'>
+        <Typography variant='body1' fontWeight={700} align='left'>
           Координаты
         </Typography>
         {coordinates ? (
@@ -100,11 +90,15 @@ export const DefectModule = () => {
         )}
       </Box>
       <Box>
-        <Typography variant='h2'>Адрес</Typography>
+        <Typography variant='body1' fontWeight={700}>
+          Адрес
+        </Typography>
         <Typography>{address.length ? address : 'Поиск адреса'}</Typography>
       </Box>
       <Box>
-        <Typography variant='h2'>Выберите тип дефекта</Typography>
+        <Typography variant='body1' fontWeight={700}>
+          Выберите категорию
+        </Typography>
         <RadioGroup
           sx={{display: 'flex', flexDirection: 'row'}}
           aria-labelledby='demo-radio-buttons-group-label'
@@ -116,25 +110,24 @@ export const DefectModule = () => {
         </RadioGroup>
       </Box>
       <Box>
-        <Typography variant='h2'>Введите вид дефекта</Typography>
-        <FormControl sx={{m: 1, width: '100%'}}>
-          <Select size='small' {...register('defectView')}>
-            <MenuItem value={''}>Не выбрано</MenuItem>
-            <MenuItem value={'10'}>Ten</MenuItem>
-            <MenuItem value={'20'}>Twenty</MenuItem>
-            <MenuItem value={'30'}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
+        <Typography variant='body1' fontWeight={700}>
+          Введите вид дефекта
+        </Typography>
+        <TextField size='small' fullWidth {...register('defectView')} />
       </Box>
 
       <Box>
-        <Typography variant='h2'>Введите площадь</Typography>
+        <Typography variant='body1' fontWeight={700}>
+          Введите площадь
+        </Typography>
         <TextField {...register('square')} size='small' type='number' sx={{width: '20%', marginRight: '10px'}} />
         <Typography display={'inline'}>кв.м.</Typography>
       </Box>
 
       <Box>
-        <Typography variant='h2'>Загрузите фотографии</Typography>
+        <Typography variant='body1' fontWeight={700}>
+          Загрузите фотографии
+        </Typography>
         <Button variant='outlined' onClick={() => setIsCam(!isCam)}>
           Камера
         </Button>
@@ -169,6 +162,7 @@ export const DefectModule = () => {
         }}
       >
         <Button
+          disabled={!(photos.length && watch('square') && watch('defectView'))}
           onClick={() => {
             onSaveDefect();
           }}
