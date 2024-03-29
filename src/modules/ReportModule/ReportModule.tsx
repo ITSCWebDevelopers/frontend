@@ -1,9 +1,9 @@
-import {useEffect, useState} from 'react';
+import {getReports} from '@/shared/api/requests/reports';
+import {useAppSelector} from '@/shared/hooks/redux';
 import {Box, Button, List, TextField, Typography} from '@mui/material';
+import {useEffect, useState} from 'react';
 import {useNavigate, useSearchParams} from 'react-router-dom';
 import {Defect} from './components/Defect';
-import {useAppSelector} from '@/shared/hooks/redux';
-import {getReports} from '@/shared/api/requests/reports';
 export const ReportModule = () => {
   const defects = useAppSelector((state) => state.defect);
   const [params] = useSearchParams();
@@ -12,12 +12,16 @@ export const ReportModule = () => {
 
   useEffect(() => {
     const fetchReport = async () => {
-      const response = await getReports();
-      console.log(response.data.find((r) => r.report_id.toString() === params.get('reportId')));
-      setReportData(response.data.filter((r) => r.report_id.toString() === params.get('reportId'))[0]);
+      try {
+        const response = await getReports();
+        console.log(response.data.find((r) => r.report_id.toString() === params.get('reportId')));
+        setReportData(response.data.filter((r) => r.report_id.toString() === params.get('reportId'))[0]);
+      } catch (e) {
+        console.error(e);
+      }
     };
 
-    if (params.get('reportId') !== 'undefined') {
+    if (params.get('reportId') !== 'null') {
       fetchReport();
     }
   }, [params.get('reportId')]);
