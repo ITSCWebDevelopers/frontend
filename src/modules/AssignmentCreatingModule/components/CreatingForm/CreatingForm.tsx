@@ -104,6 +104,7 @@ export const CreatingForm = () => {
                 error={!!errors.description}
                 fullWidth
                 id='description'
+                multiline
                 inputProps={{...register('description')}}
               />
               <IconButton onClick={handleToggleListening}>
