@@ -61,3 +61,11 @@ interface CreateRepairDto {
   date?: string;
   description: string;
 }
+
+interface RepairShortDto {
+  id: string;
+  road_name: string;
+  defect_type: string;
+  contractor_name: string;
+  deadline?: string;
+}

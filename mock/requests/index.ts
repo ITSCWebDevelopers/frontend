@@ -5,3 +5,4 @@ export * from './applications/get';
 export * from './damages/get';
 export * from './contractors/get';
 export * from './repair/post';
+export * from './repairs/get';
