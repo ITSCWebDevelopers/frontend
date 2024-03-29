@@ -8,42 +8,69 @@ export const ReportModule = () => {
   const defects = useAppSelector((state) => state.defect);
   const [params] = useSearchParams();
   const navigate = useNavigate();
-  const [reportData, setReportData] = useState<any>(null);
+  const [reportData, setReportData] = useState<ReportModel | null>(null);
 
   useEffect(() => {
     const fetchReport = async () => {
       const response = await getReports();
-      console.log(response.data);
-      setReportData(response.data);
+      console.log(response.data.find((r) => r.report_id.toString() === params.get('reportId')));
+      setReportData(response.data.filter((r) => r.report_id.toString() === params.get('reportId'))[0]);
     };
     if (params.get('reportId') !== 'undefined') {
       fetchReport();
     }
   }, [params.get('reportId')]);
 
+  const onCreateReport = () => {
+    console.log('Создал отчет');
+    console.log(defects);
+    //    navigate('/');
+    window.location.href = '/';
+  };
+
   return (
     <Box sx={{display: 'flex', height: '100%', flexDirection: 'column', gap: '10px'}}>
       <Box>
         <Typography variant='h6'>Протяжённость</Typography>
         <Box sx={{display: 'flex', gap: '10px'}}>
-          <TextField sx={{width: '10ch'}} size={'small'} type='number'>
-            3
-          </TextField>
+          <TextField
+            sx={{width: '10ch'}}
+            size={'small'}
+            type='number'
+            disabled={!!reportData}
+            value={reportData?.road_size}
+          />
           <Typography sx={{width: 'fit-content'}}>км</Typography>
         </Box>
       </Box>
       <Box>
         <Typography variant={'h6'}>Категория дороги</Typography>
-        <TextField size='small' sx={{width: '100%'}}></TextField>
+        <TextField
+          size='small'
+          sx={{width: '100%'}}
+          disabled={!!reportData}
+          value={reportData?.road_category}
+        ></TextField>
       </Box>
       <Box>
         <Typography variant={'h6'}>Тип покрытия</Typography>
-        <TextField size='small' sx={{width: '100%'}}></TextField>
+        <TextField
+          size='small'
+          sx={{width: '100%'}}
+          disabled={!!reportData}
+          value={reportData?.surface_type}
+        ></TextField>
       </Box>
       <Box>
         <Typography variant='h6'>Список дефектов</Typography>
       </Box>
-      <List sx={{width: '100%'}}>{!!defects.length && defects.map((_, index) => <Defect key={index} />)}</List>
+      {reportData ? (
+        <List sx={{width: '100%'}}>
+          {!!reportData.defects.length && reportData.defects.map((_, index) => <Defect key={index} />)}
+        </List>
+      ) : (
+        <List sx={{width: '100%'}}>{!!defects.length && defects.map((_, index) => <Defect key={index} />)}</List>
+      )}
       <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
         <Button onClick={() => navigate(`/defect?roadName=${params.get('roadName')}`)} variant='outlined'>
           Добавить дефект
@@ -58,7 +85,9 @@ export const ReportModule = () => {
           justifyContent: 'center',
         }}
       >
-        <Button variant='contained'>Отправить отчет</Button>
+        <Button disabled={!!reportData} variant='contained' onClick={onCreateReport}>
+          {reportData ? 'Отчет отправлен' : 'Отправить отчет'}
+        </Button>
       </Box>
     </Box>
   );

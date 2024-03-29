@@ -1,18 +1,7 @@
 import {GetFindAddress} from '@/shared/api/requests/address';
 import {useAppDispatch} from '@/shared/hooks/redux';
 import {Defect, setDefect} from '@/store/defect/defectSlice';
-import {
-  Box,
-  Button,
-  FormControl,
-  FormControlLabel,
-  MenuItem,
-  Radio,
-  RadioGroup,
-  Select,
-  TextField,
-  Typography,
-} from '@mui/material';
+import {Box, Button, FormControlLabel, Radio, RadioGroup, TextField, Typography} from '@mui/material';
 import {useEffect, useRef, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
@@ -26,7 +15,7 @@ export const DefectModule = () => {
   const [isCam, setIsCam] = useState(false);
   const [photos, setPhotos] = useState<string[]>([]);
   const [address, setAddress] = useState('');
-  const {register, getValues} = useForm<Defect>({defaultValues: {defectView: ''}});
+  const {register, getValues, watch} = useForm<Defect>();
   const webcamRef = useRef<Webcam>(null);
   useEffect(() => {
     if (navigator.geolocation) {
@@ -115,14 +104,7 @@ export const DefectModule = () => {
       </Box>
       <Box>
         <Typography variant='h6'>Введите вид дефекта</Typography>
-        <FormControl sx={{m: 1, width: '100%'}}>
-          <Select size='small' {...register('defectView')}>
-            <MenuItem value={''}>Не выбрано</MenuItem>
-            <MenuItem value={'10'}>Ten</MenuItem>
-            <MenuItem value={'20'}>Twenty</MenuItem>
-            <MenuItem value={'30'}>Thirty</MenuItem>
-          </Select>
-        </FormControl>
+        <TextField size='small' fullWidth {...register('defectView')} />
       </Box>
 
       <Box>
@@ -167,6 +149,7 @@ export const DefectModule = () => {
         }}
       >
         <Button
+          disabled={!(photos.length && watch('square') && watch('defectView'))}
           onClick={() => {
             onSaveDefect();
           }}
