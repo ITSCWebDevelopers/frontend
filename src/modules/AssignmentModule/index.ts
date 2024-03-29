@@ -1,0 +1,1 @@
+export {AssignmentModule} from './AssignmentModule';
