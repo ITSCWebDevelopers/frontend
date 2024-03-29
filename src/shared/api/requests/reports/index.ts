@@ -2,4 +2,5 @@ import {instance} from '@/shared/api';
 
 export type getReportsConfig = RequestConfig | void;
 
-export const getReports = (params: getReportsConfig) => instance.get<ReportModel[]>('/reports/', params?.config);
+export const getReport = (reportId: any, params: getReportsConfig) =>
+  instance.get<ReportModel>(`/check/${reportId}/`, params?.config);
