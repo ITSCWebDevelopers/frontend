@@ -68,13 +68,15 @@ export const ReportModule = () => {
           reportData?.damages.map((damage) => (
             <Defect id={damage.id} reportId={reportData.id} type='approved' key={damage.id} />
           ))}
-        {!!defects.length && defects.map((_, index) => <Defect type='loaded' key={index} />)}
+        {!!defects.length && !reportData && defects.map((_, index) => <Defect type='loaded' key={index} />)}
       </List>
-      <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-        <Button onClick={() => navigate(`/defect?roadName=${params.get('roadName')}`)} variant='outlined'>
-          Добавить дефект
-        </Button>
-      </Box>
+      {!reportData && (
+        <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+          <Button onClick={() => navigate(`/defect?roadName=${params.get('roadName')}`)} variant='outlined'>
+            Добавить дефект
+          </Button>
+        </Box>
+      )}
       <Box
         sx={{
           display: 'flex',
