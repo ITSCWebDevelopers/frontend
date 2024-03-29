@@ -4,6 +4,7 @@ import {Tasks} from './pages/Tasks';
 import {Defect} from './pages/Defect/Defect';
 import {Report} from './pages/Report/Report';
 import {Layout} from './components/Layout';
+import {CreatingAssignment} from './pages/CreatingAssignment';
 
 export const ROUTER = createBrowserRouter([
   {path: '/login', element: <Login />},
@@ -14,7 +15,7 @@ export const ROUTER = createBrowserRouter([
       {path: '/', element: <Tasks />},
       {path: '/report', element: <Report />},
       {path: '/assignment', element: <p>assignment</p>},
-      {path: '/creating-assignment', element: <p>creating-assignment</p>},
+      {path: '/creating-assignment', element: <CreatingAssignment />},
       {path: '/defect', element: <Defect />},
     ],
   },
