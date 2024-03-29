@@ -127,7 +127,7 @@ export const useCreatingForm = () => {
 
   useEffect(() => {
     setValue('description', transcript);
-  }, [listening]);
+  }, [transcript, listening]);
 
   return {
     register,

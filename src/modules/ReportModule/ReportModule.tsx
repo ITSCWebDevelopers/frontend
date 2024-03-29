@@ -1,9 +1,9 @@
-import {getReport} from '@/shared/api/requests/reports';
-import {useAppSelector} from '@/shared/hooks/redux';
-import {Box, Button, InputAdornment, List, TextField, Typography} from '@mui/material';
 import {useEffect, useState} from 'react';
+import {Box, Button, InputAdornment, List, TextField, Typography} from '@mui/material';
 import {useNavigate, useSearchParams} from 'react-router-dom';
 import {Defect} from './components/Defect';
+import {useAppSelector} from '@/shared/hooks/redux';
+import {getReport} from '@/shared/api/requests/reports';
 export const ReportModule = () => {
   const defects = useAppSelector((state) => state.defect);
   const [params] = useSearchParams();
