@@ -3,9 +3,10 @@ export const styles: Styles = {
     display: 'flex',
     flexDirection: 'column',
     gap: '20px',
+    color: 'primary.main',
   },
 
-  label: {
+  labelBox: {
     display: 'flex',
     flexDirection: 'column',
     gap: '10px',

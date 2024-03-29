@@ -32,7 +32,7 @@ export const CreatingForm = () => {
         id='application'
         options={applications}
         onChange={(_, value) => handleChangeApplication(value!.id)}
-        onInputChange={handleGetApplications}
+        onInputChange={(_, value) => handleGetApplications(value)}
         renderInput={(params) => (
           <TextField
             {...params}
@@ -49,7 +49,7 @@ export const CreatingForm = () => {
           id='damage'
           options={damages}
           onChange={(_, value) => handleChangeDamage(value!.id)}
-          onInputChange={handleGetDamages}
+          onInputChange={(_, value) => handleGetDamages(value)}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -67,7 +67,7 @@ export const CreatingForm = () => {
           id='contractor'
           options={contractors}
           onChange={(_, value) => handleChangeContractor(value!.id)}
-          onInputChange={handleGetContractors}
+          onInputChange={(_, value) => handleGetContractors(value)}
           renderInput={(params) => (
             <TextField
               {...params}
@@ -81,16 +81,23 @@ export const CreatingForm = () => {
 
       {isContractorChosen && (
         <>
-          <Box component='label' sx={styles.label}>
+          <Box component='label' sx={styles.labelBox}>
             <Typography>Email подрядчика</Typography>
-            <Typography>{getContractor().email}</Typography>
+            <Typography>{getContractor()?.email}</Typography>
           </Box>
 
-          <Box component='label' sx={styles.label} htmlFor='date'>
-            Устранить до <TextField id='date' inputProps={{...register('date')}} type='date' />
+          <Box component='label' sx={styles.labelBox} htmlFor='date'>
+            <Typography>Устранить до</Typography>
+            <TextField
+              id='date'
+              error={!!errors.date}
+              helperText={errors.date?.message}
+              inputProps={{...register('date')}}
+              type='date'
+            />
           </Box>
-          <Box component='label' sx={styles.label} htmlFor='description'>
-            Текст поручения
+          <Box component='label' sx={styles.labelBox} htmlFor='description'>
+            <Typography>Текст поручения</Typography>
             <Box sx={styles.description}>
               <TextField
                 helperText={errors.description?.message}
