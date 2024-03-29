@@ -1,6 +1,6 @@
 import {getReport} from '@/shared/api/requests/reports';
 import {useAppSelector} from '@/shared/hooks/redux';
-import {Box, Button, List, TextField, Typography} from '@mui/material';
+import {Box, Button, InputAdornment, List, TextField, Typography} from '@mui/material';
 import {useEffect, useState} from 'react';
 import {useNavigate, useSearchParams} from 'react-router-dom';
 import {Defect} from './components/Defect';
@@ -36,16 +36,14 @@ export const ReportModule = () => {
     <Box sx={{display: 'flex', height: '100%', flexDirection: 'column', gap: '10px'}}>
       <Box>
         <Typography variant='body1'>Протяжённость</Typography>
-        <Box sx={{display: 'flex', gap: '10px'}}>
-          <TextField
-            sx={{width: '10ch'}}
-            size={'small'}
-            type='number'
-            disabled={!!reportData}
-            value={reportData?.road_length}
-          />
-          <Typography sx={{width: 'fit-content'}}>км</Typography>
-        </Box>
+        <TextField
+          size='small'
+          type='number'
+          sx={{width: '100%'}}
+          disabled={!!reportData}
+          value={reportData?.road_length}
+          InputProps={{endAdornment: <InputAdornment position='end'>км</InputAdornment>}}
+        />
       </Box>
       <Box>
         <Typography variant='body1'>Категория дороги</Typography>

@@ -1,12 +1,12 @@
-import {GetFindAddress} from '@/shared/api/requests/address';
-import {useAppDispatch} from '@/shared/hooks/redux';
-import {setDefect} from '@/store/defect/defectSlice';
-import {Box, Button, FormControlLabel, Radio, RadioGroup, TextField, Typography} from '@mui/material';
 import {useEffect, useRef, useState} from 'react';
+import {Box, Button, FormControlLabel, InputAdornment, Radio, RadioGroup, TextField, Typography} from '@mui/material';
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
 import type Webcam from 'react-webcam';
 import {CameraModal} from './CameraModal';
+import {setDefect} from '@/store/defect/defectSlice';
+import {useAppDispatch} from '@/shared/hooks/redux';
+import {GetFindAddress} from '@/shared/api/requests/address';
 
 import type {Defect} from '@/store/defect/defectSlice';
 
@@ -120,8 +120,13 @@ export const DefectModule = () => {
         <Typography variant='body1' fontWeight={700}>
           Введите площадь
         </Typography>
-        <TextField {...register('square')} size='small' type='number' sx={{width: '20%', marginRight: '10px'}} />
-        <Typography display={'inline'}>кв.м.</Typography>
+        <TextField
+          {...register('square')}
+          size='small'
+          type='number'
+          sx={{width: '100%'}}
+          InputProps={{endAdornment: <InputAdornment position='end'>кв.м.</InputAdornment>}}
+        />
       </Box>
 
       <Box>
