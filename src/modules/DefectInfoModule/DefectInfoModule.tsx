@@ -1,3 +1,4 @@
+import {ImgCustom} from '@/components/ImgCustom/ImgCustom';
 import {getDefectInfo} from '@/shared/api/requests/checks/damage';
 import {Box, Button, Typography} from '@mui/material';
 import {useEffect, useState} from 'react';
@@ -52,10 +53,16 @@ export const DefectInfoModule = () => {
       <Box>
         <Typography variant='h6'>Фотографии дефекта</Typography>
         {defectInfo.damaged_photos.map((d) => (
-          <img
-            style={{display: 'block', objectFit: 'fill', width: '90px', height: '90px', borderRadius: '15%'}}
-            src={'https://itscweb.pythonanywhere.com' + d.image}
+          // <img
+          //   style={{display: 'block', objectFit: 'fill', width: '90px', height: '90px', borderRadius: '15%'}}
+          //   src={'https://itscweb.pythonanywhere.com' + d.image}
+          //   key={d.image}
+          // />
+          <ImgCustom
             key={d.image}
+            src={'https://itscweb.pythonanywhere.com' + d.image}
+            width={'90px'}
+            height={'90px'}
           />
         ))}
       </Box>

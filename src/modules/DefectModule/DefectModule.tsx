@@ -8,6 +8,7 @@ import {useNavigate} from 'react-router-dom';
 import type Webcam from 'react-webcam';
 import {CameraModal} from './CameraModal';
 
+import {ImgCustom} from '@/components/ImgCustom/ImgCustom';
 import type {Defect} from '@/store/defect/defectSlice';
 
 export const DefectModule = () => {
@@ -135,11 +136,12 @@ export const DefectModule = () => {
       <Box sx={{display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
         {photos?.map((photo, index) => (
           <Box>
-            <img
+            {/* <img
               style={{display: 'block', objectFit: 'fill', width: '90px', height: '90px', borderRadius: '15%'}}
               src={photo}
               key={index}
-            />
+            /> */}
+            <ImgCustom key={photo} src={photo} width={'90px'} height={'90px'} />
             <Button
               onClick={() => {
                 setPhotos((prev) => prev.filter((_, photoIndex) => photoIndex !== index));
