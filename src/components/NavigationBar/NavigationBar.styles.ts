@@ -1,17 +1,15 @@
 export const styles: Styles = {
-  navigation: {
-    position: 'relative',
-  },
-
   path: {
     display: 'flex',
-    justifyContent: 'center',
+    alignItems: 'center',
     position: 'relative',
+    paddingBlockStart: '15px',
+    gap: '20px',
   },
 
-  icon: {
-    position: 'absolute',
-    left: 0,
-    top: 0,
+  name: {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
   },
 };
