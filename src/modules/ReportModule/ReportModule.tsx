@@ -64,7 +64,10 @@ export const ReportModule = () => {
         <Typography variant='body1'>Список дефектов</Typography>
       </Box>
       <List sx={{width: '100%'}}>
-        {!!reportData?.damages && reportData?.damages.map((_, index) => <Defect type='approved' key={index} />)}
+        {!!reportData?.damages &&
+          reportData?.damages.map((damage) => (
+            <Defect id={damage.id} reportId={reportData.id} type='approved' key={damage.id} />
+          ))}
         {!!defects.length && defects.map((_, index) => <Defect type='loaded' key={index} />)}
       </List>
       <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
