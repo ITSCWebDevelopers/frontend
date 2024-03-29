@@ -1,11 +1,11 @@
-import {useForm} from 'react-hook-form';
-import {yupResolver} from '@hookform/resolvers/yup';
-import {useNavigate} from 'react-router-dom';
-import {type LoginValidationSchema, loginValidationSchema} from './LoginForm.constants';
+import {ERRORS} from '@/shared/constants/errors';
+import {ROUTES} from '@/shared/constants/routes';
 import {useAppDispatch} from '@/shared/hooks/redux';
 import {loginAction} from '@/store/user/userAsyncActions';
-import {ROUTES} from '@/shared/constants/routes';
-import {ERRORS} from '@/shared/constants/errors';
+import {yupResolver} from '@hookform/resolvers/yup';
+import {useForm} from 'react-hook-form';
+import {useNavigate} from 'react-router-dom';
+import {loginValidationSchema, type LoginValidationSchema} from './LoginForm.constants';
 
 export const useLoginForm = () => {
   const {
@@ -13,7 +13,10 @@ export const useLoginForm = () => {
     handleSubmit,
     setError,
     formState: {errors},
-  } = useForm<LoginValidationSchema>({resolver: yupResolver(loginValidationSchema)});
+  } = useForm<LoginValidationSchema>({
+    resolver: yupResolver(loginValidationSchema),
+    defaultValues: {username: 'mikhail@gmail.com', password: 'Morishima@2005'},
+  });
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
