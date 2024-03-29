@@ -1,9 +1,9 @@
-import {getReports} from '@/shared/api/requests/reports';
-import {useAppSelector} from '@/shared/hooks/redux';
-import {Box, Button, List, TextField, Typography} from '@mui/material';
 import {useEffect, useState} from 'react';
+import {Box, Button, List, TextField, Typography} from '@mui/material';
 import {useNavigate, useSearchParams} from 'react-router-dom';
 import {Defect} from './components/Defect';
+import {useAppSelector} from '@/shared/hooks/redux';
+import {getReports} from '@/shared/api/requests/reports';
 export const ReportModule = () => {
   const defects = useAppSelector((state) => state.defect);
   const [params] = useSearchParams();
@@ -16,6 +16,7 @@ export const ReportModule = () => {
       console.log(response.data);
       setReportData(response.data);
     };
+
     if (params.get('reportId') !== 'undefined') {
       fetchReport();
     }
@@ -24,7 +25,7 @@ export const ReportModule = () => {
   return (
     <Box sx={{display: 'flex', height: '100%', flexDirection: 'column', gap: '10px'}}>
       <Box>
-        <Typography variant='h6'>Протяжённость</Typography>
+        <Typography variant='body1'>Протяжённость</Typography>
         <Box sx={{display: 'flex', gap: '10px'}}>
           <TextField sx={{width: '10ch'}} size={'small'} type='number'>
             3
@@ -33,15 +34,15 @@ export const ReportModule = () => {
         </Box>
       </Box>
       <Box>
-        <Typography variant={'h6'}>Категория дороги</Typography>
+        <Typography variant='body1'>Категория дороги</Typography>
         <TextField size='small' sx={{width: '100%'}}></TextField>
       </Box>
       <Box>
-        <Typography variant={'h6'}>Тип покрытия</Typography>
+        <Typography variant='body1'>Тип покрытия</Typography>
         <TextField size='small' sx={{width: '100%'}}></TextField>
       </Box>
       <Box>
-        <Typography variant='h6'>Список дефектов</Typography>
+        <Typography variant='body1'>Список дефектов</Typography>
       </Box>
       <List sx={{width: '100%'}}>{!!defects.length && defects.map((_, index) => <Defect key={index} />)}</List>
       <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>

@@ -4,7 +4,7 @@ import {TasksModule} from '@/modules/TasksModule';
 
 export const Tasks = () => (
   <Box sx={styles.wrapper}>
-    <Typography variant='h3'>Задачи</Typography>
+    <Typography variant='h2'>Задачи</Typography>
     <TasksModule />
   </Box>
 );

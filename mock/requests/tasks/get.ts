@@ -9,7 +9,7 @@ export const getTasksConfig: RestRequestConfig = {
         {
           id: '1',
           report_id: '2',
-          road_name: 'MI1',
+          road_name: 'М5 «Урал» Москва - Рязань',
           address: 'ул. Новособорная',
           coordinates: {
             id: '123',
@@ -21,7 +21,7 @@ export const getTasksConfig: RestRequestConfig = {
         {
           id: '2',
           //report_id: '2',
-          road_name: 'MI2',
+          road_name: 'М6 «Урал» Москва - Рязань',
           address: 'ул. Ленина',
           coordinates: {
             lat: 58,
@@ -33,7 +33,7 @@ export const getTasksConfig: RestRequestConfig = {
         {
           id: '3',
           report_id: '3',
-          road_name: 'MI3',
+          road_name: 'М7 «Урал» Москва - Рязань',
           address: 'ул. Калинина',
           coordinates: {
             lat: 58,

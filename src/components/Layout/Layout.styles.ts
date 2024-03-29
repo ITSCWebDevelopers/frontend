@@ -4,13 +4,9 @@ export const styles: Styles = {
     flexDirection: 'column',
   },
 
-  divider: {
-    marginBlock: '5px',
-  },
-
   main: {
     flex: '1 1 auto',
-    paddingInline: '15px',
-    paddingBlock: '5px',
+    paddingInline: '25px',
+    paddingBlock: '35px 15px',
   },
 };

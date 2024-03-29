@@ -46,7 +46,6 @@ interface ApplicationShortDto {
 interface DamageShortDto {
   id: string;
   damage_type: string;
-  address: string;
 }
 
 interface ContractorModel {

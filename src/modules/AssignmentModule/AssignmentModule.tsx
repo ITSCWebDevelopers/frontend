@@ -17,7 +17,7 @@ export const AssignmentModule = () => {
         <Typography>{error}</Typography>
       ) : (
         <Box>
-          <Typography sx={styles.title} variant='h4'>
+          <Typography sx={styles.title} variant='h2'>
             Отправленное
           </Typography>
           <AssignmentList assignments={assignments} />

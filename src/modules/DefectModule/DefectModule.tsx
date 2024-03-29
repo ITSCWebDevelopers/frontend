@@ -1,6 +1,4 @@
-import {GetFindAddress} from '@/shared/api/requests/address';
-import {useAppDispatch} from '@/shared/hooks/redux';
-import {Defect, setDefect} from '@/store/defect/defectSlice';
+import {useEffect, useRef, useState} from 'react';
 import {
   Box,
   Button,
@@ -13,11 +11,14 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import {useEffect, useRef, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
-import Webcam from 'react-webcam';
+import type Webcam from 'react-webcam';
 import {CameraModal} from './CameraModal';
+import {setDefect} from '@/store/defect/defectSlice';
+import type {Defect} from '@/store/defect/defectSlice';
+import {useAppDispatch} from '@/shared/hooks/redux';
+import {GetFindAddress} from '@/shared/api/requests/address';
 
 export const DefectModule = () => {
   const navigate = useNavigate();
@@ -59,6 +60,7 @@ export const DefectModule = () => {
 
   const capture = () => {
     const imageSrc = webcamRef.current?.getScreenshot();
+
     if (!imageSrc) return;
     setPhotos((prev) => [...prev, imageSrc]);
     setIsCam(false);
@@ -86,7 +88,7 @@ export const DefectModule = () => {
         </div>
       )}
       <Box>
-        <Typography variant='h6' align='left'>
+        <Typography variant='h2' align='left'>
           Координаты
         </Typography>
         {coordinates ? (
@@ -98,11 +100,11 @@ export const DefectModule = () => {
         )}
       </Box>
       <Box>
-        <Typography variant='h6'>Адрес</Typography>
+        <Typography variant='h2'>Адрес</Typography>
         <Typography>{address.length ? address : 'Поиск адреса'}</Typography>
       </Box>
       <Box>
-        <Typography variant='h6'>Выберите тип дефекта</Typography>
+        <Typography variant='h2'>Выберите тип дефекта</Typography>
         <RadioGroup
           sx={{display: 'flex', flexDirection: 'row'}}
           aria-labelledby='demo-radio-buttons-group-label'
@@ -114,7 +116,7 @@ export const DefectModule = () => {
         </RadioGroup>
       </Box>
       <Box>
-        <Typography variant='h6'>Введите вид дефекта</Typography>
+        <Typography variant='h2'>Введите вид дефекта</Typography>
         <FormControl sx={{m: 1, width: '100%'}}>
           <Select size='small' {...register('defectView')}>
             <MenuItem value={''}>Не выбрано</MenuItem>
@@ -126,13 +128,13 @@ export const DefectModule = () => {
       </Box>
 
       <Box>
-        <Typography variant='h6'>Введите площадь</Typography>
+        <Typography variant='h2'>Введите площадь</Typography>
         <TextField {...register('square')} size='small' type='number' sx={{width: '20%', marginRight: '10px'}} />
         <Typography display={'inline'}>кв.м.</Typography>
       </Box>
 
       <Box>
-        <Typography variant='h6'>Загрузите фотографии</Typography>
+        <Typography variant='h2'>Загрузите фотографии</Typography>
         <Button variant='outlined' onClick={() => setIsCam(!isCam)}>
           Камера
         </Button>

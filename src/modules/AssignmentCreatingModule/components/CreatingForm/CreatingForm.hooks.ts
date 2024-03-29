@@ -119,7 +119,7 @@ export const useCreatingForm = () => {
   const translateDamages = () =>
     damages.map((damage) => ({
       id: damage.id,
-      label: `${damage.damage_type}, ${damage.address}`,
+      label: `${damage.damage_type}`,
     }));
 
   useEffect(() => {

@@ -3,6 +3,7 @@ export const styles: Styles = {
     display: 'flex',
     flexDirection: 'column',
     gap: '30px',
+    color: 'primary.main',
   },
 
   title: {

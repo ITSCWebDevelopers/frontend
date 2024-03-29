@@ -23,9 +23,19 @@ export const useNavigationBar = () => {
   }, [location.pathname]);
 
   useEffect(() => {
-    if (location.pathname.includes('/report')) setName(params.get('roadName') || 'Заявление');
-    else if (location.pathname.includes('/defect')) setName(params.get('defectName') || 'Дефект');
-    else if (location.pathname.includes(ROUTES.CREATING_ASSIGNMENT)) setName('Создание поручения');
+    switch (location.pathname) {
+      case '/report':
+        setName(params.get('roadName') || 'Заявление');
+        break;
+      case '/defect':
+        setName(params.get('defectName') || 'Дефект');
+        break;
+      case ROUTES.CREATING_ASSIGNMENT:
+        setName('Создание поручения');
+        break;
+      default:
+        setName('Назад');
+    }
   }, [isRoot]);
 
   return {isRoot, name, handleTabsChange, path: location.pathname, handleBack};
