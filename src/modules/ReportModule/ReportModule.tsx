@@ -85,7 +85,7 @@ export const ReportModule = () => {
         }}
       >
         <Button disabled={!!reportData} variant='contained' onClick={onCreateReport}>
-          {reportData ? 'Отчет отправлен' : 'Отправить отчет'}
+          {reportData ? 'Сохранено' : 'Сохранить'}
         </Button>
       </Box>
     </Box>
