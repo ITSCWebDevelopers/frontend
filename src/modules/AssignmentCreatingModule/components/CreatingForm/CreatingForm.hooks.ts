@@ -76,28 +76,27 @@ export const useCreatingForm = () => {
     setValue('contractor', `${contractorIndex}`);
   };
 
-  const handleGetApplications = async () => {
+  const handleGetApplications = async (query?: string) => {
     try {
-      const res = await getApplications();
-      console.log();
+      const res = await getApplications({config: {params: {road_name: query}}});
       setApplications(res.data);
     } catch (e) {
       console.error(e);
     }
   };
 
-  const handleGetDamages = async () => {
+  const handleGetDamages = async (query?: string) => {
     try {
-      const res = await getApplicationDamages(getValues('application'));
+      const res = await getApplicationDamages(getValues('application'), {config: {params: {damage_type: query}}});
       setDamages(res.data);
     } catch (e) {
       console.error(e);
     }
   };
 
-  const handleGetContractors = async () => {
+  const handleGetContractors = async (query?: string) => {
     try {
-      const res = await getContractors();
+      const res = await getContractors({config: {params: {name: query}}});
       setContractors(res.data);
     } catch (e) {
       console.error(e);
@@ -112,7 +111,7 @@ export const useCreatingForm = () => {
 
   const translateApplications = () =>
     applications.map((application) => ({
-      id: application.id,
+      id: application.report_id,
       label: application.road_name,
     }));
 

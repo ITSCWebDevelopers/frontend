@@ -5,7 +5,7 @@ export const creatingFormValidationSchema = yup.object({
   application: yup.string().required(ERRORS.REQUIRED),
   damage: yup.string().required(ERRORS.REQUIRED),
   contractor: yup.string().required(ERRORS.REQUIRED),
-  date: yup.string(),
+  date: yup.string().required(ERRORS.REQUIRED),
   description: yup.string().required(ERRORS.REQUIRED),
 });
 
