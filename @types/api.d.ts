@@ -7,6 +7,22 @@ interface TokenResponse {
   token: string;
 }
 
+interface DefectInfoModel {
+  damaged_photos: {
+    image: string;
+  }[];
+  size?: number;
+  status: string;
+  category: string;
+  type: string;
+  location: {
+    id: number;
+    address: string;
+    lat: number;
+    lng: number;
+  };
+}
+
 interface TaskModel {
   id: string;
   report_id?: string;
