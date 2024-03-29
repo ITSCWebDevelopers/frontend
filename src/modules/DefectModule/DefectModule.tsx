@@ -91,7 +91,7 @@ export const DefectModule = () => {
         <Typography>{address.length ? address : 'Поиск адреса'}</Typography>
       </Box>
       <Box>
-        <Typography variant='h6'>Выберите тип дефекта</Typography>
+        <Typography variant='h6'>Выберите категорию</Typography>
         <RadioGroup
           sx={{display: 'flex', flexDirection: 'row'}}
           aria-labelledby='demo-radio-buttons-group-label'
@@ -103,7 +103,7 @@ export const DefectModule = () => {
         </RadioGroup>
       </Box>
       <Box>
-        <Typography variant='h6'>Введите вид дефекта</Typography>
+        <Typography variant='h6'>Введите тип дефекта</Typography>
         <TextField size='small' fullWidth {...register('defectView')} />
       </Box>
 
