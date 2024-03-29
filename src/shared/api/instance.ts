@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const instance = axios.create({
-  baseURL: 'http://localhost:31299/api',
+  baseURL: 'https://itscweb.pythonanywhere.com/',
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',

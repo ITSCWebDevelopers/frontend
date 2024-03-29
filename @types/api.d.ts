@@ -39,7 +39,7 @@ interface ReportModel {
 }
 
 interface ApplicationShortDto {
-  id: string;
+  report_id: string;
   road_name: string;
 }
 
