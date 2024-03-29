@@ -1,7 +1,18 @@
 import {GetFindAddress} from '@/shared/api/requests/address';
 import {useAppDispatch} from '@/shared/hooks/redux';
 import {Defect, setDefect} from '@/store/defect/defectSlice';
-import {Box, Button, FormControlLabel, Radio, RadioGroup, TextField, Typography} from '@mui/material';
+import {
+  Box,
+  Button,
+  FormControl,
+  FormControlLabel,
+  MenuItem,
+  Radio,
+  RadioGroup,
+  Select,
+  TextField,
+  Typography,
+} from '@mui/material';
 import {useEffect, useRef, useState} from 'react';
 import {useForm} from 'react-hook-form';
 import {useNavigate} from 'react-router-dom';
@@ -15,7 +26,7 @@ export const DefectModule = () => {
   const [isCam, setIsCam] = useState(false);
   const [photos, setPhotos] = useState<string[]>([]);
   const [address, setAddress] = useState('');
-  const {register, getValues} = useForm<Defect>();
+  const {register, getValues} = useForm<Defect>({defaultValues: {defectView: ''}});
   const webcamRef = useRef<Webcam>(null);
   useEffect(() => {
     if (navigator.geolocation) {
@@ -64,6 +75,7 @@ export const DefectModule = () => {
         square: getValues('square'),
       }),
     );
+    navigate(-1);
   };
 
   return (
@@ -82,12 +94,12 @@ export const DefectModule = () => {
             {coordinates.latitude} - {coordinates.longitude}
           </Typography>
         ) : (
-          <Typography align='left'>Координаты не найдены</Typography>
+          <Typography align='left'>Поиск координат</Typography>
         )}
       </Box>
       <Box>
         <Typography variant='h6'>Адрес</Typography>
-        <Typography>{address.length ? address : 'Адрес не найден'}</Typography>
+        <Typography>{address.length ? address : 'Поиск адреса'}</Typography>
       </Box>
       <Box>
         <Typography variant='h6'>Выберите тип дефекта</Typography>
@@ -103,7 +115,14 @@ export const DefectModule = () => {
       </Box>
       <Box>
         <Typography variant='h6'>Введите вид дефекта</Typography>
-        <TextField {...register('defectView')} size='small' sx={{width: '100%'}} />
+        <FormControl sx={{m: 1, width: '100%'}}>
+          <Select size='small' {...register('defectView')}>
+            <MenuItem value={''}>Не выбрано</MenuItem>
+            <MenuItem value={'10'}>Ten</MenuItem>
+            <MenuItem value={'20'}>Twenty</MenuItem>
+            <MenuItem value={'30'}>Thirty</MenuItem>
+          </Select>
+        </FormControl>
       </Box>
 
       <Box>
@@ -121,7 +140,11 @@ export const DefectModule = () => {
       <Box sx={{display: 'flex', flexWrap: 'wrap', gap: '10px'}}>
         {photos?.map((photo, index) => (
           <Box>
-            <img style={{display: 'block', width: '100px', height: '100px'}} src={photo} key={index} />
+            <img
+              style={{display: 'block', width: '100px', height: '100px', borderRadius: '15%'}}
+              src={photo}
+              key={index}
+            />
             <Button
               onClick={() => {
                 setPhotos((prev) => prev.filter((_, photoIndex) => photoIndex !== index));
@@ -146,7 +169,6 @@ export const DefectModule = () => {
         <Button
           onClick={() => {
             onSaveDefect();
-            navigate(-1);
           }}
           variant='contained'
         >

@@ -1,11 +1,25 @@
+import {getReports} from '@/shared/api/requests/reports';
 import {useAppSelector} from '@/shared/hooks/redux';
 import {Box, Button, List, TextField, Typography} from '@mui/material';
+import {useEffect, useState} from 'react';
 import {useNavigate, useSearchParams} from 'react-router-dom';
 import {Defect} from './components/Defect';
 export const ReportModule = () => {
   const defects = useAppSelector((state) => state.defect);
   const [params] = useSearchParams();
   const navigate = useNavigate();
+  const [reportData, setReportData] = useState<any>(null);
+
+  useEffect(() => {
+    const fetchReport = async () => {
+      const response = await getReports();
+      console.log(response.data);
+      setReportData(response.data);
+    };
+    if (params.get('reportId') !== 'undefined') {
+      fetchReport();
+    }
+  }, [params.get('reportId')]);
 
   return (
     <Box sx={{display: 'flex', height: '100%', flexDirection: 'column', gap: '10px'}}>
@@ -31,7 +45,7 @@ export const ReportModule = () => {
       </Box>
       <List sx={{width: '100%'}}>{!!defects.length && defects.map((_, index) => <Defect key={index} />)}</List>
       <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-        <Button onClick={() => navigate(`/defect?roadName=${params.get('road')}`)} variant='outlined'>
+        <Button onClick={() => navigate(`/defect?roadName=${params.get('roadName')}`)} variant='outlined'>
           Добавить дефект
         </Button>
       </Box>

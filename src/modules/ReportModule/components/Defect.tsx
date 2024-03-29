@@ -5,7 +5,7 @@ export const Defect = () => {
     <ListItem>
       <Box sx={{display: 'flex', width: '100%', flexDirection: 'row'}}>
         <ListItemText>Дефект {'\u003E'} </ListItemText>
-        <ListItemText sx={{textAlign: 'end', color: 'red'}}>Данные не загружены</ListItemText>
+        <ListItemText sx={{textAlign: 'end', color: 'green'}}>Данные загружены</ListItemText>
       </Box>
     </ListItem>
   );
